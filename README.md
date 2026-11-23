@@ -10,6 +10,10 @@ An Agent Skill for running a multi-AI relay where **one lead agent does the work
 - **Role-rotation interrogation rounds**: for quality-critical work, the AIs take turns playing questioner and respondent, must concede what is true, and converge on a locked fix list.
 - **Browser discipline**: one dedicated conversation per AI per topic, batch authorization, no credentials ever sent to a web AI.
 
+## v2 (2026-11-23, three-AI reviewed)
+
+Reviewed in relay by GPT (problem advisor), DeepSeek (red team) and Gemini (arbiter): interrogation capped at 2 rounds, three-element questions, two-tier evidence (verifiable / unverified), veto requires a pass condition, closure rights stay with the human, three-line recovery list, single-file relay record.
+
 ## Install
 
 ```bash

@@ -27,8 +27,18 @@ For quality-critical work (upgrading a film, a system, a plan), run interrogatio
 - Roles rotate every round: GPT questions → DeepSeek answers/defends → Gemini questions the defense → GPT defends… Nobody keeps the same role two rounds in a row; the questioner of round N becomes a respondent in round N+1.
 - The next AI receives the full Q&A log so far (questions, answers, conceded points) and must (a) answer the open questions addressed to it, (b) concede what is true instead of defending everything, (c) add its own questions for the next respondent.
 - Muse （the lead agent） is also a respondent: when questioned, answer honestly with local evidence (frames, files, measurements), never bluff.
-- Stop when questions stop producing new concessions or fixes, or after the round count the user set. Muse then locks the converged list （定版清单） and executes it.
-- Log every question and answer in the task's note file (like questions-log.md); the log is the audit trail, the chat only gets the converged list.
+- Hard cap: at most 2 interrogation rounds per topic （首轮质疑 + 1 次回应）. Beyond that, stop and let the user decide: close, shelve, or escalate. No new concessions does not mean resolved — unresolved P0 items stay BLOCKED, never declared converged.
+- Log every question and answer in the task's single relay record file; the log is the audit trail, the chat only gets the converged list.
+
+## Authority, veto and closure (v2, three-AI reviewed 2026-11-23)
+
+- the user is the only final decision-maker and holds closure/release rights. Gemini arbitrates and recommends; its ruling never overrides the user's explicit requirements.
+- A veto is valid only for three enumerated reasons: (1) factual error with a reproducible check, (2) violation of a hard constraint the user stated, (3) logical contradiction naming the conflicting claims. Every veto must state its pass condition ("withdrawn if …"); a veto without one is void. Anything else is a suggestion, not a veto.
+- P0 items close only when evidence is verifiable and no fatal contradiction remains; agents propose closure with remaining risks listed, the user closes.
+- Authorization scope is explicit per task (sites, files, actions). Read-only/draft/reversible steps run automatically; writing external state, publishing, spending money, or deleting data needs the user's confirmation. Never silently switch to a paid service or use his Zhipu/DeepSeek keys beyond the approved scope.
+- Evidence is two-tier: **verifiable** (locatable source/output/steps, within the model's actual perception — e.g. never claim audio/video details a web model cannot hear or see) vs **unverified** (everything else, the default). Spot-check "verifiable" claims; if one cannot be reproduced, downgrade it and log the challenge. Unverified P0 never counts as passed.
+- Question format is three elements: goal + success criteria / known facts + hard constraints / the specific dispute or question. Each bat's output ends with a 【需人类点开确认】 section (or "无").
+- On failure (login expiry, captcha, rate limit, truncation): stop, keep the last good state, and report a three-line recovery list — current blocker / finished artifacts / next action. Retry only when the previous attempt's state is understood.
 
 ## Task table per bat
 
